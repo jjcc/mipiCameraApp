@@ -8,6 +8,7 @@ import FOVFilter from "@/components/FOVFilter";
 import EFLFilter from "@/components/EFLFilter";
 import FNoFilter from "@/components/FNoFilter";
 import TVDFilter from "@/components/TVDFilter";
+import NoOfLensFilter from "@/components/NoOfLensFilter";
 import { CameraModuleListResponse } from "@/components/types";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://127.0.0.1:8000";
@@ -20,6 +21,7 @@ export default function HomePage() {
   const [efl, setEFL] = useState<string | null>(null);
   const [fNo, setFNo] = useState<string | null>(null);
   const [tvD, setTvD] = useState<string | null>(null);
+  const [noOfLens, setNoOfLens] = useState<string | null>(null);
   const [data, setData] = useState<CameraModuleListResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,10 +38,11 @@ export default function HomePage() {
     if (efl) params.set("efl", efl);
     if (fNo) params.set("f_no", fNo);
     if (tvD) params.set("tv_d", tvD);
+    if (noOfLens) params.set("no_of_lens", noOfLens);
     
     const queryString = params.toString();
     return queryString ? `${API_BASE}/api/modules?${queryString}` : `${API_BASE}/api/modules?limit=100`;
-  }, [query, pixel, chipSize, fov, efl, fNo, tvD]);
+  }, [query, pixel, chipSize, fov, efl, fNo, tvD, noOfLens]);
 
   async function search() {
     setLoading(true);
@@ -112,6 +115,14 @@ export default function HomePage() {
               <TVDFilter
                 value={tvD}
                 onChange={setTvD}
+                disabled={loading}
+              />
+            </div>
+            <div className="filter-container">
+              <label htmlFor="no-of-lens-select" className="filter-label">Lens Count</label>
+              <NoOfLensFilter
+                value={noOfLens}
+                onChange={setNoOfLens}
                 disabled={loading}
               />
             </div>

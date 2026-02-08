@@ -258,3 +258,23 @@ button {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.no-of-lens-filter {
+  width: 100%;
+}
+
+.no-of-lens-select {
+  width: 100%;
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.no-of-lens-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
