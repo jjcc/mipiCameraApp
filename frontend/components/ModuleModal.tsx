@@ -7,10 +7,109 @@ interface ModuleModalProps {
   onClose: () => void;
 }
 
+interface TreeNode {
+  content: string;
+  level: number;
+  children: TreeNode[];
+}
+
 export default function ModuleModal({ module, isOpen, onClose }: ModuleModalProps) {
   if (!isOpen || !module) return null;
 
   const spec = module.specification;
+
+  // Function to get indentation level (number of leading spaces)
+  const getIndentLevel = (line: string): number => {
+    let spaces = 0;
+    for (const char of line) {
+      if (char === ' ') {
+        spaces++;
+      } else {
+        break;
+      }
+    }
+    return Math.floor(spaces / 2); // Assume 2 spaces = 1 level
+  };
+
+  // Function to check if line is a list item
+  const isListItem = (line: string): boolean => {
+    return line.trim().startsWith("- ");
+  };
+
+  // Function to parse YAML-like structure with proper hierarchy
+  const parseYamlLines = (featuresText: string): TreeNode[] => {
+    const lines = featuresText.split("\n");
+    const root: TreeNode = { content: "", level: -1, children: [] };
+    const stack: TreeNode[] = [root];
+
+    for (const line of lines) {
+      if (!line.trim()) continue; // Skip empty lines
+
+      const indentLevel = getIndentLevel(line);
+      const trimmedContent = line.trim();
+      
+      // Remove leading "- " if present
+      const content = isListItem(line) ? trimmedContent.substring(2) : trimmedContent;
+
+      const node: TreeNode = {
+        content,
+        level: indentLevel,
+        children: []
+      };
+
+      // Pop stack until we find parent
+      while (stack.length > 1 && stack[stack.length - 1].level >= indentLevel) {
+        stack.pop();
+      }
+
+      // Add as child of current parent
+      stack[stack.length - 1].children.push(node);
+      stack.push(node);
+    }
+
+    return root.children;
+  };
+
+  // Recursive function to render tree nodes
+  const renderTreeNode = (node: TreeNode, key: string, isLast: boolean): JSX.Element => {
+    const hasChildren = node.children.length > 0;
+    const isListItem = node.level >= 0;
+
+    if (hasChildren) {
+      // Parent node with children
+      return (
+        <div key={key} className="modal-feature-parent" style={{ marginLeft: `${node.level * 1}rem` }}>
+          <div className="modal-feature-section">
+            {isListItem && <span className="modal-bullet-point">•</span>}
+            <strong>{node.content}</strong>
+          </div>
+          <div className="modal-feature-children">
+            {node.children.map((child, idx) => 
+              renderTreeNode(child, `${key}-${idx}`, idx === node.children.length - 1)
+            )}
+          </div>
+        </div>
+      );
+    } else {
+      // Leaf node (no children)
+      return (
+        <div 
+          key={key} 
+          className="modal-feature-item"
+          style={{ marginLeft: `${node.level * 1}rem` }}
+        >
+          {isListItem ? (
+            <>
+              <span className="modal-bullet-point">•</span>
+              <span>{node.content}</span>
+            </>
+          ) : (
+            <p className="modal-feature-paragraph">{node.content}</p>
+          )}
+        </div>
+      );
+    }
+  };
 
   // Function to parse and format features text
   const formatFeatures = (featuresText: string | null | undefined): JSX.Element => {
@@ -34,40 +133,12 @@ export default function ModuleModal({ module, isOpen, onClose }: ModuleModalProp
       // Not valid YAML, treat as formatted text
     }
 
-    // Split by newlines and render with proper formatting
-    const lines = featuresText.split("\n").filter((line) => line.trim());
+    // Parse with proper hierarchy
+    const tree = parseYamlLines(featuresText);
     
     return (
       <div className="modal-features-text">
-        {lines.map((line, index) => {
-          const trimmedLine = line.trim();
-          
-          // Check if it's a section header (ends with :)
-          if (trimmedLine.endsWith(":")) {
-            return (
-              <div key={index} className="modal-feature-section">
-                <strong>{trimmedLine}</strong>
-              </div>
-            );
-          }
-          
-          // Check if it's a bullet point
-          if (trimmedLine.startsWith("- ") || trimmedLine.startsWith("• ")) {
-            return (
-              <div key={index} className="modal-feature-bullet">
-                <span className="modal-bullet-point">•</span>
-                <span>{trimmedLine.substring(2)}</span>
-              </div>
-            );
-          }
-          
-          // Regular paragraph
-          return (
-            <p key={index} className="modal-feature-paragraph">
-              {trimmedLine}
-            </p>
-          );
-        })}
+        {tree.map((node, index) => renderTreeNode(node, index.toString(), index === tree.length - 1))}
       </div>
     );
   };
@@ -94,7 +165,6 @@ export default function ModuleModal({ module, isOpen, onClose }: ModuleModalProp
                 <span className="modal-info-label">Interface:</span>
                 <span className="modal-info-value">{module.interface_method || "N/A"}</span>
               </div>
-
               <div className="modal-info-item">
                 <span className="modal-info-label">Size:</span>
                 <span className="modal-info-value">{module.model_size || "N/A"}</span>

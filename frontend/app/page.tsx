@@ -148,14 +148,6 @@ export default function HomePage() {
         </div>
       </div>
       <div className="search-row">
-          <input
-            placeholder="Search model, sensor, features..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") search();
-            }}
-          />
           <button onClick={search} disabled={loading}>
             {loading ? "Loading..." : "Search"}
           </button>

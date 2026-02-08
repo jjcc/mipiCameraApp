@@ -17,6 +17,7 @@ export default function CameraCard({ module, onClick }: Props) {
         <span className="badge">Pixel: {spec?.pixel || "-"}</span>
         <span className="badge">FOV: {spec?.fov || "-"}</span>
         <span className="badge">EFL: {spec?.efl || "-"}</span>
+        <span className="badge">Module Size: {module.model_size|| "-"}</span>
       </div>
       <div className="card-click-hint">
         <span className="hint-text">Click for details</span>

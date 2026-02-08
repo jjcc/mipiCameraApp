@@ -56,7 +56,6 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding-left: 0.25rem;
-  border-left: 3px solid var(--brand);
 }
 
 .filters-row {
@@ -537,4 +536,29 @@ button {
   margin: 0.6rem 0;
   line-height: 1.6;
   text-align: justify;
+}
+
+.modal-feature-parent {
+  margin-bottom: 1rem;
+}
+
+.modal-feature-children {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  border-left: 2px solid var(--line);
+  padding-left: 0.75rem;
+}
+
+.modal-feature-child {
+  display: flex;
+  align-items: flex-start;
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.modal-feature-item {
+  display: flex;
+  align-items: flex-start;
+  margin: 0.3rem 0;
+  line-height: 1.5;
 }
