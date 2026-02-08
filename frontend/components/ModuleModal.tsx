@@ -81,7 +81,7 @@ export default function ModuleModal({ module, isOpen, onClose }: ModuleModalProp
         <div key={key} className="modal-feature-parent" style={{ marginLeft: `${node.level * 1}rem` }}>
           <div className="modal-feature-section">
             {isListItem && <span className="modal-bullet-point">•</span>}
-            <strong>{node.content}</strong>
+            <span>{node.content}</span>
           </div>
           <div className="modal-feature-children">
             {node.children.map((child, idx) => 
@@ -126,7 +126,7 @@ export default function ModuleModal({ module, isOpen, onClose }: ModuleModalProp
               <div key={index} className="modal-feature-parent">
                 <div className="modal-feature-section">
                   <span className="modal-bullet-point">•</span>
-                  <strong>{firstLine}</strong>
+                  <span>{firstLine}</span>
                 </div>
                 {remainingLines.length > 0 && (
                   <div className="modal-feature-children">
@@ -142,9 +142,9 @@ export default function ModuleModal({ module, isOpen, onClose }: ModuleModalProp
             );
           }
           
-          // Simple list item
+          // Simple list item - use same styling as parent items
           return (
-            <div key={index} className="modal-feature-item">
+            <div key={index} className="modal-feature-section">
               <span className="modal-bullet-point">•</span>
               <span>{item}</span>
             </div>

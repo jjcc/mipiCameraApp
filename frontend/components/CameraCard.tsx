@@ -20,7 +20,7 @@ export default function CameraCard({ module, onClick }: Props) {
         <span className="badge">Module Size: {module.model_size|| "-"}</span>
       </div>
       <div className="card-click-hint">
-        <span className="hint-text">Click for details</span>
+        <span className="hint-text">Click for detail features</span>
       </div>
     </article>
   );

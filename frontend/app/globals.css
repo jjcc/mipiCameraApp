@@ -578,13 +578,23 @@ button {
   margin-bottom: 0;
 }
 
-.modal-feature-section {
-  color: var(--brand);
-  font-weight: 600;
+.modal-feature-section,
+.modal-feature-parent > .modal-feature-section {
+  color: var(--text);
+  font-weight: 400;
   margin-bottom: 0.5rem;
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.modal-feature-parent {
+  margin-bottom: 0.75rem;
+}
+
+.modal-feature-parent > .modal-feature-section {
+  font-weight: 400;
 }
 
 .modal-feature-children {
