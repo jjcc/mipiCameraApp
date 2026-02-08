@@ -26,6 +26,8 @@ def health() -> dict[str, str]:
 def list_modules(
     q: str | None = Query(default=None, description="Search by model/sensor/features"),
     pixel: str | None = Query(default=None, description="Filter by pixel value"),
+    chip_size: str | None = Query(default=None, description="Filter by chip size value"),
+    fov: str | None = Query(default=None, description="Filter by FOV value"),
     limit: int = Query(default=20, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
     db: Connection = Depends(get_db),
@@ -43,6 +45,14 @@ def list_modules(
     if pixel:
         where_clauses.append("s.pixel = ?")
         params.append(pixel)
+
+    if chip_size:
+        where_clauses.append("s.chip_size = ?")
+        params.append(chip_size)
+
+    if fov:
+        where_clauses.append("s.fov = ?")
+        params.append(fov)
 
     where = f"WHERE {' AND '.join(where_clauses)}" if where_clauses else ""
 
@@ -121,6 +131,30 @@ def get_unique_pixels(db: Connection = Depends(get_db)) -> list[str]:
     """
     rows = db.execute(sql).fetchall()
     return [row["pixel"] for row in rows]
+
+
+@app.get("/api/chip_sizes")
+def get_unique_chip_sizes(db: Connection = Depends(get_db)) -> list[str]:
+    sql = """
+        SELECT DISTINCT chip_size
+        FROM specifications
+        WHERE chip_size IS NOT NULL AND chip_size != ''
+        ORDER BY chip_size
+    """
+    rows = db.execute(sql).fetchall()
+    return [row["chip_size"] for row in rows]
+
+
+@app.get("/api/fovs")
+def get_unique_fovs(db: Connection = Depends(get_db)) -> list[str]:
+    sql = """
+        SELECT DISTINCT fov
+        FROM specifications
+        WHERE fov IS NOT NULL AND fov != ''
+        ORDER BY fov
+    """
+    rows = db.execute(sql).fetchall()
+    return [row["fov"] for row in rows]
 
 
 @app.get("/api/modules/{module_id}", response_model=CameraModule)
