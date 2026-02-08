@@ -2,30 +2,30 @@
 
 import { useEffect, useState } from "react";
 
-interface PixelFilterProps {
+interface FOVFilterProps {
   value: string | null;
-  onChange: (pixel: string | null) => void;
+  onChange: (fov: string | null) => void;
   disabled?: boolean;
 }
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://127.0.0.1:8000";
 
-export default function PixelFilter({ value, onChange, disabled = false }: PixelFilterProps) {
-  const [pixels, setPixels] = useState<string[]>([]);
+export default function FOVFilter({ value, onChange, disabled = false }: FOVFilterProps) {
+  const [fovs, setFovs] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchPixels() {
+    async function fetchFOVs() {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(`${API_BASE}/api/pixels`, { cache: "no-store" });
+        const res = await fetch(`${API_BASE}/api/fovs`, { cache: "no-store" });
         if (!res.ok) {
           throw new Error(`API error: ${res.status}`);
         }
         const data = await res.json();
-        setPixels(data);
+        setFovs(data);
       } catch (err) {
         const msg = err instanceof Error ? err.message : "Unknown error";
         setError(msg);
@@ -34,26 +34,26 @@ export default function PixelFilter({ value, onChange, disabled = false }: Pixel
       }
     }
 
-    fetchPixels();
+    fetchFOVs();
   }, []);
 
   return (
-    <div className="pixel-filter">
+    <div className="fov-filter">
       <select
-        id="pixel-select"
+        id="fov-select"
         value={value || ""}
         onChange={(e) => onChange(e.target.value || null)}
         disabled={disabled || loading}
-        className="pixel-select"
+        className="fov-select"
       >
-        <option value="">All Pixels</option>
-        {pixels.map((pixel) => (
-          <option key={pixel} value={pixel}>
-            {pixel}
+        <option value="">All FOVs</option>
+        {fovs.map((fov) => (
+          <option key={fov} value={fov}>
+            {fov}
           </option>
         ))}
       </select>
-      {error && <span className="error">Error loading pixels</span>}
+      {error && <span className="error">Error loading FOVs</span>}
     </div>
   );
 }

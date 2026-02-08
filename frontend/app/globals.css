@@ -31,9 +31,44 @@ h1 {
 }
 
 .controls {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filters-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 120px;
+  max-width: 200px;
+}
+
+.pixel-filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 120px;
+  max-width: 200px;
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.search-row {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  align-items: center;
 }
 
 input {
@@ -45,7 +80,7 @@ input {
 }
 
 .pixel-filter {
-  min-width: 120px;
+  width: 100%;
 }
 
 .pixel-select {
@@ -60,6 +95,46 @@ input {
 }
 
 .pixel-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.chip-size-filter {
+  width: 100%;
+}
+
+.chip-size-select {
+  width: 100%;
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.chip-size-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fov-filter {
+  width: 100%;
+}
+
+.fov-select {
+  width: 100%;
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.fov-select:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
