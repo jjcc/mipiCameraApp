@@ -1,4 +1,4 @@
-﻿from pathlib import Path
+from pathlib import Path
 from sqlite3 import Connection, Row
 import sqlite3
 from typing import Generator
@@ -8,7 +8,7 @@ DB_PATH = BASE_DIR / "camera_modules.db"
 
 
 def get_connection() -> Connection:
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     conn.row_factory = Row
     return conn
 
