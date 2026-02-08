@@ -278,3 +278,247 @@ button {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+/* Features section styling */
+.features-wrapper {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.features-container {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.yaml-content {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.features-text {
+  margin-top: 0.5rem;
+}
+
+.feature-section {
+  margin: 0.75rem 0 0.5rem 0;
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.feature-section:first-child {
+  margin-top: 0;
+}
+
+.feature-bullet {
+  display: flex;
+  align-items: flex-start;
+  margin: 0.3rem 0;
+  padding-left: 0.5rem;
+}
+
+.bullet-point {
+  color: var(--brand);
+  margin-right: 0.5rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.feature-paragraph {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+/* Card click styles */
+.card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-click-hint {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.hint-text {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: var(--panel);
+  border-radius: 12px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--text);
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.modal-close-btn:hover {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-info-section,
+.modal-specs-section,
+.modal-features-section {
+  margin-bottom: 1.5rem;
+}
+
+.modal-info-section h3,
+.modal-specs-section h3,
+.modal-features-section h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: var(--brand);
+  border-bottom: 2px solid var(--brand);
+  padding-bottom: 0.5rem;
+}
+
+.modal-info-grid,
+.modal-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.75rem;
+}
+
+.modal-info-item,
+.modal-spec-item {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--bg);
+  border-radius: 6px;
+}
+
+.modal-info-label,
+.modal-spec-label {
+  font-weight: 600;
+  color: var(--muted);
+  min-width: 100px;
+}
+
+.modal-info-value,
+.modal-spec-value {
+  color: var(--text);
+}
+
+.modal-yaml-content {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.modal-features-text {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.modal-feature-section {
+  margin: 0.75rem 0 0.5rem 0;
+  color: var(--brand);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.modal-feature-section:first-child {
+  margin-top: 0;
+}
+
+.modal-feature-bullet {
+  display: flex;
+  align-items: flex-start;
+  margin: 0.4rem 0;
+  padding-left: 0.75rem;
+}
+
+.modal-bullet-point {
+  color: var(--brand);
+  margin-right: 0.5rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.modal-feature-paragraph {
+  margin: 0.6rem 0;
+  line-height: 1.6;
+  text-align: justify;
+}

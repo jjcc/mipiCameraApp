@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import CameraCard from "@/components/CameraCard";
+import ModuleModal from "@/components/ModuleModal";
 import PixelFilter from "@/components/PixelFilter";
 import ChipSizeFilter from "@/components/ChipSizeFilter";
 import FOVFilter from "@/components/FOVFilter";
@@ -9,7 +10,7 @@ import EFLFilter from "@/components/EFLFilter";
 import FNoFilter from "@/components/FNoFilter";
 import TVDFilter from "@/components/TVDFilter";
 import NoOfLensFilter from "@/components/NoOfLensFilter";
-import { CameraModuleListResponse } from "@/components/types";
+import { CameraModule, CameraModuleListResponse } from "@/components/types";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://127.0.0.1:8000";
 
@@ -25,6 +26,8 @@ export default function HomePage() {
   const [data, setData] = useState<CameraModuleListResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedModule, setSelectedModule] = useState<CameraModule | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const endpoint = useMemo(() => {
     const params = new URLSearchParams();
@@ -60,6 +63,16 @@ export default function HomePage() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleCardClick(module: CameraModule) {
+    setSelectedModule(module);
+    setIsModalOpen(true);
+  }
+
+  function handleCloseModal() {
+    setIsModalOpen(false);
+    setSelectedModule(null);
   }
 
   return (
@@ -149,9 +162,15 @@ export default function HomePage() {
 
       <section className="grid">
         {data?.items.map((m) => (
-          <CameraCard key={m.id} module={m} />
+          <CameraCard key={m.id} module={m} onClick={handleCardClick} />
         ))}
       </section>
+
+      <ModuleModal
+        module={selectedModule}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </main>
   );
 }
