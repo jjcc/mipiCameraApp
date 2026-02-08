@@ -562,3 +562,41 @@ button {
   margin: 0.3rem 0;
   line-height: 1.5;
 }
+
+.modal-features-list {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.modal-feature-parent {
+  margin-bottom: 1rem;
+}
+
+.modal-feature-parent:last-child {
+  margin-bottom: 0;
+}
+
+.modal-feature-section {
+  color: var(--brand);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.modal-feature-children {
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
+  border-left: 2px solid var(--line);
+  padding-left: 0.75rem;
+}
+
+.modal-feature-child {
+  display: flex;
+  align-items: flex-start;
+  margin: 0.3rem 0;
+  line-height: 1.5;
+}

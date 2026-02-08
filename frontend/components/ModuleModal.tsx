@@ -111,6 +111,49 @@ export default function ModuleModal({ module, isOpen, onClose }: ModuleModalProp
     }
   };
 
+  // Function to render YAML array items
+  const renderYamlArray = (items: string[]): JSX.Element => {
+    return (
+      <div className="modal-features-list">
+        {items.map((item, index) => {
+          // Check if item has nested structure (contains newlines)
+          if (item.includes('\n')) {
+            const lines = item.split('\n');
+            const firstLine = lines[0];
+            const remainingLines = lines.slice(1).filter(l => l.trim());
+            
+            return (
+              <div key={index} className="modal-feature-parent">
+                <div className="modal-feature-section">
+                  <span className="modal-bullet-point">•</span>
+                  <strong>{firstLine}</strong>
+                </div>
+                {remainingLines.length > 0 && (
+                  <div className="modal-feature-children">
+                    {remainingLines.map((line, idx) => (
+                      <div key={idx} className="modal-feature-child">
+                        <span className="modal-bullet-point">•</span>
+                        <span>{line.trim()}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          }
+          
+          // Simple list item
+          return (
+            <div key={index} className="modal-feature-item">
+              <span className="modal-bullet-point">•</span>
+              <span>{item}</span>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
   // Function to parse and format features text
   const formatFeatures = (featuresText: string | null | undefined): JSX.Element => {
     if (!featuresText) {
@@ -121,14 +164,49 @@ export default function ModuleModal({ module, isOpen, onClose }: ModuleModalProp
       // Try to parse as YAML
       const parsed = yaml.load(featuresText);
       
+      if (Array.isArray(parsed)) {
+        // It's a YAML array, render each item
+        return renderYamlArray(parsed);
+      }
+      
       if (typeof parsed === "object" && parsed !== null) {
-        // It's valid YAML object, render it structured
+        // It's a YAML object, render it as structured tree
         return (
-          <pre className="modal-yaml-content">
-            {yaml.dump(parsed, { indent: 2 })}
-          </pre>
+          <div className="modal-features-text">
+            {Object.entries(parsed).map(([key, value], index) => {
+              if (Array.isArray(value)) {
+                return (
+                  <div key={index} className="modal-feature-parent">
+                    <div className="modal-feature-section">
+                      <strong>{key}:</strong>
+                    </div>
+                    <div className="modal-feature-children">
+                      {value.map((item, idx) => (
+                        <div key={idx} className="modal-feature-child">
+                          <span className="modal-bullet-point">•</span>
+                          <span>{String(item)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <div key={index} className="modal-feature-item">
+                  <strong>{key}:</strong> {String(value)}
+                </div>
+              );
+            })}
+          </div>
         );
       }
+      
+      // It's a simple string
+      return (
+        <div className="modal-features-text">
+          <p className="modal-feature-paragraph">{String(parsed)}</p>
+        </div>
+      );
     } catch {
       // Not valid YAML, treat as formatted text
     }
