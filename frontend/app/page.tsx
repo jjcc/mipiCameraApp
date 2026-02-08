@@ -5,6 +5,9 @@ import CameraCard from "@/components/CameraCard";
 import PixelFilter from "@/components/PixelFilter";
 import ChipSizeFilter from "@/components/ChipSizeFilter";
 import FOVFilter from "@/components/FOVFilter";
+import EFLFilter from "@/components/EFLFilter";
+import FNoFilter from "@/components/FNoFilter";
+import TVDFilter from "@/components/TVDFilter";
 import { CameraModuleListResponse } from "@/components/types";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://127.0.0.1:8000";
@@ -14,6 +17,9 @@ export default function HomePage() {
   const [pixel, setPixel] = useState<string | null>(null);
   const [chipSize, setChipSize] = useState<string | null>(null);
   const [fov, setFOV] = useState<string | null>(null);
+  const [efl, setEFL] = useState<string | null>(null);
+  const [fNo, setFNo] = useState<string | null>(null);
+  const [tvD, setTvD] = useState<string | null>(null);
   const [data, setData] = useState<CameraModuleListResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -27,10 +33,13 @@ export default function HomePage() {
     if (pixel) params.set("pixel", pixel);
     if (chipSize) params.set("chip_size", chipSize);
     if (fov) params.set("fov", fov);
+    if (efl) params.set("efl", efl);
+    if (fNo) params.set("f_no", fNo);
+    if (tvD) params.set("tv_d", tvD);
     
     const queryString = params.toString();
     return queryString ? `${API_BASE}/api/modules?${queryString}` : `${API_BASE}/api/modules?limit=100`;
-  }, [query, pixel, chipSize, fov]);
+  }, [query, pixel, chipSize, fov, efl, fNo, tvD]);
 
   async function search() {
     setLoading(true);
@@ -76,6 +85,30 @@ export default function HomePage() {
             <FOVFilter
               value={fov}
               onChange={setFOV}
+              disabled={loading}
+            />
+          </div>
+          <div className="filter-container">
+            <label htmlFor="efl-select" className="filter-label">EFL</label>
+            <EFLFilter
+              value={efl}
+              onChange={setEFL}
+              disabled={loading}
+            />
+          </div>
+          <div className="filter-container">
+            <label htmlFor="f-no-select" className="filter-label">F/No</label>
+            <FNoFilter
+              value={fNo}
+              onChange={setFNo}
+              disabled={loading}
+            />
+          </div>
+          <div className="filter-container">
+            <label htmlFor="tv-d-select" className="filter-label">TV Distortion</label>
+            <TVDFilter
+              value={tvD}
+              onChange={setTvD}
               disabled={loading}
             />
           </div>

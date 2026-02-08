@@ -13,7 +13,6 @@ export default function CameraCard({ module }: Props) {
       <p className="row">Sensor: {module.sensor_model || "N/A"}</p>
       <p className="row">Interface: {module.interface_method || "N/A"}</p>
       <p className="row">Platform: {module.application_platform || "N/A"}</p>
-      <p className="row">Price: {module.price_usd || module.price_rmb || "N/A"}</p>
       <div className="row">
         <span className="badge">Pixel: {spec?.pixel || "-"}</span>
         <span className="badge">FOV: {spec?.fov || "-"}</span>

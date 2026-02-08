@@ -28,6 +28,9 @@ def list_modules(
     pixel: str | None = Query(default=None, description="Filter by pixel value"),
     chip_size: str | None = Query(default=None, description="Filter by chip size value"),
     fov: str | None = Query(default=None, description="Filter by FOV value"),
+    efl: str | None = Query(default=None, description="Filter by EFL value"),
+    f_no: str | None = Query(default=None, description="Filter by F/No value"),
+    tv_d: str | None = Query(default=None, description="Filter by TV Distortion value"),
     limit: int = Query(default=20, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
     db: Connection = Depends(get_db),
@@ -53,6 +56,18 @@ def list_modules(
     if fov:
         where_clauses.append("s.fov = ?")
         params.append(fov)
+
+    if efl:
+        where_clauses.append("s.efl = ?")
+        params.append(efl)
+
+    if f_no:
+        where_clauses.append("s.f_no = ?")
+        params.append(f_no)
+
+    if tv_d:
+        where_clauses.append("s.tv_d = ?")
+        params.append(tv_d)
 
     where = f"WHERE {' AND '.join(where_clauses)}" if where_clauses else ""
 
@@ -155,6 +170,42 @@ def get_unique_fovs(db: Connection = Depends(get_db)) -> list[str]:
     """
     rows = db.execute(sql).fetchall()
     return [row["fov"] for row in rows]
+
+
+@app.get("/api/efls")
+def get_unique_efls(db: Connection = Depends(get_db)) -> list[str]:
+    sql = """
+        SELECT DISTINCT efl
+        FROM specifications
+        WHERE efl IS NOT NULL AND efl != ''
+        ORDER BY efl
+    """
+    rows = db.execute(sql).fetchall()
+    return [row["efl"] for row in rows]
+
+
+@app.get("/api/f_nos")
+def get_unique_f_nos(db: Connection = Depends(get_db)) -> list[str]:
+    sql = """
+        SELECT DISTINCT f_no
+        FROM specifications
+        WHERE f_no IS NOT NULL AND f_no != ''
+        ORDER BY f_no
+    """
+    rows = db.execute(sql).fetchall()
+    return [row["f_no"] for row in rows]
+
+
+@app.get("/api/tv_ds")
+def get_unique_tv_ds(db: Connection = Depends(get_db)) -> list[str]:
+    sql = """
+        SELECT DISTINCT tv_d
+        FROM specifications
+        WHERE tv_d IS NOT NULL AND tv_d != ''
+        ORDER BY tv_d
+    """
+    rows = db.execute(sql).fetchall()
+    return [row["tv_d"] for row in rows]
 
 
 @app.get("/api/modules/{module_id}", response_model=CameraModule)
