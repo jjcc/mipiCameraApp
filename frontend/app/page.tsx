@@ -63,54 +63,58 @@ export default function HomePage() {
     <main className="container">
       <h1>MIPI Camera Modules</h1>
       <div className="controls">
-        <div className="filters-row">
-          <div className="filter-container">
-            <label htmlFor="pixel-select" className="filter-label">Pixel</label>
-            <PixelFilter
-              value={pixel}
-              onChange={setPixel}
-              disabled={loading}
-            />
+        <div className="filters-section">
+          <div className="filters-row sensor-filters">
+            <div className="filter-container">
+              <label htmlFor="pixel-select" className="filter-label">Pixel</label>
+              <PixelFilter
+                value={pixel}
+                onChange={setPixel}
+                disabled={loading}
+              />
+            </div>
+            <div className="filter-container">
+              <label htmlFor="chip-size-select" className="filter-label">Chip Size</label>
+              <ChipSizeFilter
+                value={chipSize}
+                onChange={setChipSize}
+                disabled={loading}
+              />
+            </div>
           </div>
-          <div className="filter-container">
-            <label htmlFor="chip-size-select" className="filter-label">Chip Size</label>
-            <ChipSizeFilter
-              value={chipSize}
-              onChange={setChipSize}
-              disabled={loading}
-            />
-          </div>
-          <div className="filter-container">
-            <label htmlFor="fov-select" className="filter-label">FOV</label>
-            <FOVFilter
-              value={fov}
-              onChange={setFOV}
-              disabled={loading}
-            />
-          </div>
-          <div className="filter-container">
-            <label htmlFor="efl-select" className="filter-label">EFL</label>
-            <EFLFilter
-              value={efl}
-              onChange={setEFL}
-              disabled={loading}
-            />
-          </div>
-          <div className="filter-container">
-            <label htmlFor="f-no-select" className="filter-label">F/No</label>
-            <FNoFilter
-              value={fNo}
-              onChange={setFNo}
-              disabled={loading}
-            />
-          </div>
-          <div className="filter-container">
-            <label htmlFor="tv-d-select" className="filter-label">TV Distortion</label>
-            <TVDFilter
-              value={tvD}
-              onChange={setTvD}
-              disabled={loading}
-            />
+          <div className="filters-row optics-filters">
+            <div className="filter-container">
+              <label htmlFor="fov-select" className="filter-label">FOV</label>
+              <FOVFilter
+                value={fov}
+                onChange={setFOV}
+                disabled={loading}
+              />
+            </div>
+            <div className="filter-container">
+              <label htmlFor="efl-select" className="filter-label">EFL</label>
+              <EFLFilter
+                value={efl}
+                onChange={setEFL}
+                disabled={loading}
+              />
+            </div>
+            <div className="filter-container">
+              <label htmlFor="f-no-select" className="filter-label">F/No</label>
+              <FNoFilter
+                value={fNo}
+                onChange={setFNo}
+                disabled={loading}
+              />
+            </div>
+            <div className="filter-container">
+              <label htmlFor="tv-d-select" className="filter-label">TV Distortion</label>
+              <TVDFilter
+                value={tvD}
+                onChange={setTvD}
+                disabled={loading}
+              />
+            </div>
           </div>
         </div>
         <div className="search-row">

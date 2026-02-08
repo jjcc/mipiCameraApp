@@ -37,10 +37,21 @@ h1 {
   gap: 0.75rem;
 }
 
+.filters-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 .filters-row {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.sensor-filters {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .filter-container {
@@ -186,4 +197,64 @@ button {
   padding: 0.15rem 0.5rem;
   margin-right: 0.3rem;
   font-size: 0.78rem;
+}
+
+.efl-filter {
+  width: 100%;
+}
+
+.efl-select {
+  width: 100%;
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.efl-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.f-no-filter {
+  width: 100%;
+}
+
+.f-no-select {
+  width: 100%;
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.f-no-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.tv-d-filter {
+  width: 100%;
+}
+
+.tv-d-select {
+  width: 100%;
+  border: 1px solid var(--line);
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.tv-d-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

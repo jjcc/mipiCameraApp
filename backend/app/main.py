@@ -31,6 +31,7 @@ def list_modules(
     efl: str | None = Query(default=None, description="Filter by EFL value"),
     f_no: str | None = Query(default=None, description="Filter by F/No value"),
     tv_d: str | None = Query(default=None, description="Filter by TV Distortion value"),
+    no_of_lens: str | None = Query(default=None, description="Filter by number of lenses value"),
     limit: int = Query(default=20, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
     db: Connection = Depends(get_db),
@@ -68,6 +69,10 @@ def list_modules(
     if tv_d:
         where_clauses.append("s.tv_d = ?")
         params.append(tv_d)
+
+    if no_of_lens:
+        where_clauses.append("s.no_of_lens = ?")
+        params.append(no_of_lens)
 
     where = f"WHERE {' AND '.join(where_clauses)}" if where_clauses else ""
 
@@ -206,6 +211,18 @@ def get_unique_tv_ds(db: Connection = Depends(get_db)) -> list[str]:
     """
     rows = db.execute(sql).fetchall()
     return [row["tv_d"] for row in rows]
+
+
+@app.get("/api/no_of_lens")
+def get_unique_no_of_lens(db: Connection = Depends(get_db)) -> list[str]:
+    sql = """
+        SELECT DISTINCT no_of_lens
+        FROM specifications
+        WHERE no_of_lens IS NOT NULL AND no_of_lens != ''
+        ORDER BY no_of_lens
+    """
+    rows = db.execute(sql).fetchall()
+    return [row["no_of_lens"] for row in rows]
 
 
 @app.get("/api/modules/{module_id}", response_model=CameraModule)
