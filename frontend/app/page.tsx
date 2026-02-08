@@ -80,35 +80,40 @@ export default function HomePage() {
       <h1>MIPI Camera Modules</h1>
       <div className="controls">
         <div className="filters-section">
-          <div className="filters-row sensor-filters">
-            <div className="filter-container">
-              <label htmlFor="pixel-select" className="filter-label">Pixel</label>
-              <PixelFilter
-                value={pixel}
-                onChange={setPixel}
-                disabled={loading}
-              />
-            </div>
-            <div className="filter-container">
-              <label htmlFor="chip-size-select" className="filter-label">Chip Size</label>
-              <ChipSizeFilter
+          <div className="filter-group">
+            <div className="filter-group-label">Sensor Features</div>
+            <div className="filters-row sensor-filters">
+              <div className="filter-container">
+                <label htmlFor="pixel-select" className="filter-label">Pixel</label>
+                <PixelFilter
+                  value={pixel}
+                  onChange={setPixel}
+                  disabled={loading}
+                />
+              </div>
+              <div className="filter-container">
+                <label htmlFor="chip-size-select" className="filter-label">Chip Size</label>
+                <ChipSizeFilter
                 value={chipSize}
                 onChange={setChipSize}
                 disabled={loading}
               />
             </div>
           </div>
-          <div className="filters-row optics-filters">
-            <div className="filter-container">
-              <label htmlFor="fov-select" className="filter-label">FOV</label>
-              <FOVFilter
+        </div>
+        <div className="filter-group">
+          <div className="filter-group-label">Optics Features</div>
+            <div className="filters-row optics-filters">
+              <div className="filter-container">
+                <label htmlFor="fov-select" className="filter-label">FOV</label>
+                <FOVFilter
                 value={fov}
                 onChange={setFOV}
                 disabled={loading}
               />
             </div>
             <div className="filter-container">
-              <label htmlFor="efl-select" className="filter-label">EFL</label>
+              <label htmlFor="efl-select" className="filter-label">Focal Length</label>
               <EFLFilter
                 value={efl}
                 onChange={setEFL}
@@ -116,7 +121,7 @@ export default function HomePage() {
               />
             </div>
             <div className="filter-container">
-              <label htmlFor="f-no-select" className="filter-label">F/No</label>
+              <label htmlFor="f-no-select" className="filter-label">Aperture</label>
               <FNoFilter
                 value={fNo}
                 onChange={setFNo}
@@ -141,7 +146,8 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="search-row">
+      </div>
+      <div className="search-row">
           <input
             placeholder="Search model, sensor, features..."
             value={query}
