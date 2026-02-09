@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+bower_components/
+
+# Testing
+coverage/
+
+# Production
+build/
+.next/
+out/
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env
+.env*.local
+
+# IDE
+.vscode/
+.idea/
+
+# Backend
+backend/.venv/
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+backend/.env
+
+# Data
+backend/data/*.db
+backend/data/*.sqlite*
+
+# Logs
+*.log
