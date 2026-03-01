@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 
-const logos = ["Sony", "OmniVision", "ON Semi", "Samsung", "Panasonic", "Himax"];
 
 export default function Hero() {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -133,28 +132,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Logo carousel */}
-        <div className="mt-20 pt-8 border-t border-brand-silver/50">
-          <p
-            className="text-center text-sm text-brand-gray mb-6"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
-            Trusted by leading sensor manufacturers
-          </p>
-          <div className="relative overflow-hidden mask-fade-x">
-            <div className="flex animate-scroll">
-              {[...logos, ...logos].map((logo, i) => (
-                <div
-                  key={i}
-                  className="flex-shrink-0 px-12 py-4 text-xl font-medium text-brand-gray/60"
-                  style={{ fontFamily: "Fraunces, serif" }}
-                >
-                  {logo}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
