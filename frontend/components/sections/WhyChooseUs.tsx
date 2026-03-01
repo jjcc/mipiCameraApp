@@ -106,7 +106,7 @@ export default function WhyChooseUs() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left: text + features */}
           <div>
-            <h2 className="animate-on-scroll text-white mb-6">Why Choose CamVista</h2>
+            <h2 className="animate-on-scroll text-white mb-6">Why Choose MetaVue</h2>
             <p
               className="animate-on-scroll stagger-1 text-lg text-white/80 mb-10 leading-relaxed"
               style={{ fontFamily: "Inter, sans-serif" }}

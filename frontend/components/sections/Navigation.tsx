@@ -52,7 +52,7 @@ export default function Navigation() {
               className="font-semibold text-xl text-brand-dark"
               style={{ fontFamily: "Fraunces, serif" }}
             >
-              CamVista
+              MetaVue
             </span>
           </a>
 

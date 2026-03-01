@@ -58,7 +58,7 @@ export default function Footer() {
                 className="font-semibold text-xl text-brand-dark"
                 style={{ fontFamily: "Fraunces, serif" }}
               >
-                CamVista
+                MetaVue
               </span>
             </div>
             <p
@@ -179,7 +179,7 @@ export default function Footer() {
               className="text-sm text-brand-gray"
               style={{ fontFamily: "Inter, sans-serif" }}
             >
-              © 2025 CamVista. All rights reserved.
+              © 2025 MetaVue. All rights reserved.
             </p>
             <div className="flex gap-6">
               {["Privacy Policy", "Terms of Service"].map((link) => (

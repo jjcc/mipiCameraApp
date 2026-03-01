@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 const testimonials = [
   {
     quote:
-      "CamVista's MIPI modules exceeded our expectations. The image quality and reliability are outstanding for our industrial vision systems. Their technical support team was instrumental in helping us integrate the modules seamlessly.",
+      "MetaVue's MIPI modules exceeded our expectations. The image quality and reliability are outstanding for our industrial vision systems. Their technical support team was instrumental in helping us integrate the modules seamlessly.",
     author: "John Mitchell",
     role: "CTO, TechVision Inc.",
     avatar: "/avatar-1.jpg",
@@ -20,14 +20,14 @@ const testimonials = [
   },
   {
     quote:
-      "We've been using CamVista modules in our ADAS products for 3 years. Their consistency and quality are unmatched. The modules perform flawlessly in extreme temperatures and challenging conditions.",
+      "We've been using MetaVue modules in our ADAS products for 3 years. Their consistency and quality are unmatched. The modules perform flawlessly in extreme temperatures and challenging conditions.",
     author: "Michael Rodriguez",
     role: "Lead Engineer, AutoVision Systems",
     avatar: "/avatar-3.jpg",
   },
   {
     quote:
-      "Fast delivery, competitive pricing, and exceptional product quality. CamVista is our go-to camera module supplier. Their team understands our requirements and always delivers beyond expectations.",
+      "Fast delivery, competitive pricing, and exceptional product quality. MetaVue is our go-to camera module supplier. Their team understands our requirements and always delivers beyond expectations.",
     author: "Emily Watson",
     role: "Director, RoboTech Industries",
     avatar: "/avatar-4.jpg",
