@@ -1,3 +1,4 @@
+import React from "react";
 import { CameraModule } from "./types";
 import yaml from "js-yaml";
 
@@ -71,7 +72,7 @@ export default function ModuleModal({ module, isOpen, onClose }: ModuleModalProp
   };
 
   // Recursive function to render tree nodes
-  const renderTreeNode = (node: TreeNode, key: string, isLast: boolean): JSX.Element => {
+  const renderTreeNode = (node: TreeNode, key: string, isLast: boolean): React.ReactElement => {
     const hasChildren = node.children.length > 0;
     const isListItem = node.level >= 0;
 
@@ -112,7 +113,7 @@ export default function ModuleModal({ module, isOpen, onClose }: ModuleModalProp
   };
 
   // Function to render YAML array items
-  const renderYamlArray = (items: string[]): JSX.Element => {
+  const renderYamlArray = (items: string[]): React.ReactElement => {
     return (
       <div className="modal-features-list">
         {items.map((item, index) => {
@@ -155,7 +156,7 @@ export default function ModuleModal({ module, isOpen, onClose }: ModuleModalProp
   };
 
   // Function to parse and format features text
-  const formatFeatures = (featuresText: string | null | undefined): JSX.Element => {
+  const formatFeatures = (featuresText: string | null | undefined): React.ReactElement => {
     if (!featuresText) {
       return <span>No features available</span>;
     }
