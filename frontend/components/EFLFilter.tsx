@@ -8,7 +8,7 @@ interface EFLFilterProps {
   disabled?: boolean;
 }
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://127.0.0.1:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "";
 
 export default function EFLFilter({ value, onChange, disabled = false }: EFLFilterProps) {
   const [efls, setEfls] = useState<string[]>([]);

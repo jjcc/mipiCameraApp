@@ -8,7 +8,7 @@ interface FOVFilterProps {
   disabled?: boolean;
 }
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://127.0.0.1:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "";
 
 export default function FOVFilter({ value, onChange, disabled = false }: FOVFilterProps) {
   const [fovs, setFovs] = useState<string[]>([]);

@@ -8,7 +8,7 @@ interface TVDFilterProps {
   disabled?: boolean;
 }
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://127.0.0.1:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "";
 
 export default function TVDFilter({ value, onChange, disabled = false }: TVDFilterProps) {
   const [tvDs, setTvDs] = useState<string[]>([]);

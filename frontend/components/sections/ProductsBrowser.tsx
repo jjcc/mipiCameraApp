@@ -12,7 +12,7 @@ import TVDFilter from "@/components/TVDFilter";
 import NoOfLensFilter from "@/components/NoOfLensFilter";
 import { CameraModule, CameraModuleListResponse } from "@/components/types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "http://127.0.0.1:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "";
 
 export default function ProductsBrowser() {
   const [query, setQuery] = useState("");
