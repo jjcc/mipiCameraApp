@@ -21,7 +21,7 @@ services:
     expose:
       - "3000"
     environment:
-      - NEXT_PUBLIC_API_BASE=http://backend:8000
+      - NEXT_PUBLIC_API_BASE=https://demo.micromacro.co
     depends_on:
       - backend
     restart: unless-stopped
